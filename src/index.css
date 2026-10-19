@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 :root {
   font:
     18px/1.5 system-ui,
@@ -21,4 +22,18 @@ button {
   font: inherit;
   padding: 0.4rem 1rem;
   cursor: pointer;
+=======
+body {
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+    monospace;
+>>>>>>> 968fb8044085e63de38822e149fc8290a3835ea3
 }
