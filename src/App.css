@@ -1,5 +1,6 @@
 .App {
-  text-align: center;
+  max-width: 1170px;
+  margin: 0 auto;
 }
 
 .App-logo {
@@ -35,4 +36,33 @@
   to {
     transform: rotate(360deg);
   }
+}
+.itemsRow {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 24px;
+}
+.itemCard {
+  border: 1px solid grey;
+  padding: 10px 20px;
+  border-radius: 8px;
+  text-align: left;
+  max-width: 200px;
+  min-width: 200px;
+}
+.addBtn {
+  background-color: darkblue;
+  color: #fff;
+  border: none;
+  outline: none;
+  padding: 10px 15px;
+  border-radius: 4px;
+}
+.removeBtn {
+  background-color: darkred;
+  color: #fff;
+  border: none;
+  outline: none;
+  padding: 10px 15px;
+  border-radius: 4px;
 }
