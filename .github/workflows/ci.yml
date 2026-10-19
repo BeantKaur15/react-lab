@@ -1,0 +1,53 @@
+# CI = a robot that runs our checks on GitHub every time we push code.
+# If any step fails, the run goes red and you can read the log to see why.
+name: ci
+
+on: [push, pull_request]
+
+jobs:
+  check:
+    # Run the whole job twice: once on Linux, once on Windows (your laptop's OS).
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-latest, windows-latest]
+    runs-on: ${{ matrix.os }}
+    steps:
+      # Download a copy of the repo onto the robot's machine.
+      - name: Checkout
+        uses: actions/checkout@v7
+
+      # Install pnpm. The version comes from "packageManager" in package.json.
+      - name: Setup pnpm
+        uses: pnpm/action-setup@v6
+
+      # Install Node (the version in .nvmrc) and cache downloads to go faster.
+      - name: Setup Node
+        uses: actions/setup-node@v7
+        with:
+          node-version-file: .nvmrc
+          cache: pnpm
+
+      # Install exactly what pnpm-lock.yaml says. Fails if the lockfile is stale.
+      - name: Install
+        run: pnpm install --frozen-lockfile
+
+      # Is every file formatted the way Prettier wants?
+      - name: Format check
+        run: pnpm run format:check
+
+      # ESLint looks for likely bugs and bad habits.
+      - name: Lint
+        run: pnpm run lint
+
+      # TypeScript checks that types line up, in the app and in the tests.
+      - name: Typecheck
+        run: pnpm run typecheck
+
+      # Run all tests with Vitest.
+      - name: Test
+        run: pnpm run test
+
+      # Make sure the production build works.
+      - name: Build
+        run: pnpm run build
